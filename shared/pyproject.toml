@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "shared"
+version = "0.1.0"
+description = "Shared library for otpclip and passclip"
+authors = ["Joni Seraj <serajjoni@gmail.com>", "Ergi Kame<ergikame@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+  {include="shared", from="shared"},
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 100
+target-version = ['py312']
+
+[tool.pylint."messages control"]
+ignore = ["setup.py", "__init__.py"]
+disable = "all"
+enable = [
+  "empty-docstring",
+  "missing-class-docstring",
+  "missing-function-docstring",
+  "missing-module-docstring"
+]
+
+[tool.isort]
+profile = "black"

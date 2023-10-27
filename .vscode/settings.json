@@ -1,0 +1,10 @@
+{
+    "python.analysis.extraPaths": [
+        "./shared"
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    }
+}
