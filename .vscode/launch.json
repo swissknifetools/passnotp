@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "OTPClip: No args",
+            "type": "python",
+            "request": "launch",
+            "module": "poetry",
+            "python": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "run",
+                "otpclip",
+              ],
+            "justMyCode": true
+        }
+    ]
+}

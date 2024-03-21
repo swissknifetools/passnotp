@@ -14,7 +14,7 @@ class ClickEchoHandler(logging.Handler):
     def emit(self, record):
         log_entry = self.format(record)
         if record.levelno == logging.DEBUG:
-            click.echo(f"{click.style('[DEBUG]', fg='bright_black')} {log_entry}")
+            click.echo(f"{click.style('[DEBUG]', fg='magenta')} {log_entry}")
         elif record.levelno == logging.INFO: 
             click.echo(f"{click.style('[INFO]', fg='blue')} {log_entry}")
         elif record.levelno == logging.WARNING: 

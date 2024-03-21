@@ -1,4 +1,4 @@
-from otpclip.config.logging import logger
+from otpclip.app.core.logging.logging import logger
 
 
 def list_otp() -> None:

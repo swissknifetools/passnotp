@@ -1,5 +1,5 @@
 import subprocess
-from otpclip.config.logging import logger
+from otpclip.app.core.logging.logging import logger
 
 def get_otp() -> None:
     result = subprocess.run(['cloak', 'view'], capture_output=True, text=True)

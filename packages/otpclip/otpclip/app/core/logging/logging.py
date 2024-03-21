@@ -1,6 +1,6 @@
 import logging
 
-from otpclip.config.env import environment
+from otpclip.app.core.config.env import environment
 from shared.logging import ClickEchoHandler
 
 # HANDLER

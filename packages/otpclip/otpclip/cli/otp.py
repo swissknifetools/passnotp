@@ -1,14 +1,17 @@
+from email.policy import default
 from pathlib import Path
 
 import click
-from otpclip.command.create import create_otp
-from otpclip.command.delete import delete_otp
-from otpclip.query.get import get_otp
-from otpclip.query.list import list_otp
+from click_default_group import DefaultGroup
+from otpclip.app.otp.command.create import create_otp
+from otpclip.app.otp.command.delete import delete_otp
+from otpclip.app.otp.query.get import get_otp
+from otpclip.app.otp.query.list import list_otp
+from otpclip.app.core.logging.logging import logger
 from shared.toml import get_version_from_toml
 
 
-@click.group(name="otpclip", invoke_without_command=True)
+@click.group(name="otpclip", cls=DefaultGroup, default='get')
 @click.pass_context
 @click.version_option(version=get_version_from_toml(Path("../../pyproject.toml")), prog_name='otpclip', message='%(version)s')
 def cli_otp(ctx: click.Context) -> None:
@@ -19,34 +22,40 @@ def cli_otp(ctx: click.Context) -> None:
     Author: Joni Seraj, Ergi Kame
     
     """
-    if ctx.invoked_subcommand is None and not ctx.args:
-        click.echo(ctx.get_help())
-    elif ctx.invoked_subcommand is None:
-        ctx.invoke(get)
-    
+    pass
+        
 @click.command()
-def list() -> None:
-    """Print a list of OTPs."""
-    list_otp()
-    
-@click.command()
-def get() -> None:
-    """Copies OTP code to your clipboard."""
-    get_otp()
-    
-@click.command()
-@click.argument('identifier')
-@click.argument('key')
-def create(identifier: str, key: str) -> None:
+@click.argument('id', type=click.STRING)
+@click.argument('key', type=click.STRING)
+def create(id: str, key: str) -> None:
     """Create OTP."""
-    create_otp(identifier, key)
+    logger.debug(f"otp|create id={id} key={key}")
+    create_otp(id, key)
     
 @click.command()
-def delete() -> None:
+@click.argument('id', type=click.STRING)
+def delete(id: str) -> None:
     """Delete OTP."""
-    delete_otp()
+    logger.debug(f"otp|delete id={id}")
+    delete_otp(id)    
+
+
+@click.command()
+@click.argument('pre', type=click.STRING)
+def list(pre: str) -> None:
+    """Print a list of OTPs."""
+    logger.debug(f"otp|list pre={pre}")
+    list_otp(pre)
     
-cli_otp.add_command(list)
-cli_otp.add_command(get)
+@click.command()
+@click.argument('id', type=click.STRING)
+def get(id: str) -> None:
+    """Copies OTP code to your clipboard."""
+    logger.debug(f"otp|get id={id}")
+    get_otp(id)
+
 cli_otp.add_command(create)
 cli_otp.add_command(delete)
+cli_otp.add_command(list)
+cli_otp.add_command(get)
+

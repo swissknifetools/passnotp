@@ -6,12 +6,13 @@ authors = ["Joni Seraj <serajjoni@gmail.com>", "Ergi Kame<ergikame@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
- {include="otpclip"},
- {include="shared", from="../../libs"}
+ {include="otpclip"}
 ]
 
 [tool.poetry.scripts]
-otpclip = 'otpclip.main:main'
+otpclip-run = 'otpclip.main:main'
+otpclip-test = 'pytest'
+
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -21,6 +22,8 @@ pydantic = "^2.4.2"
 pydantic-settings = "^2.0.3"
 toml = "^0.10.2"
 pyotp = "^2.9.0"
+shared = { path = "../../libs/shared", develop = true }
+sqlalchemy = "^2.0.23"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.1.0"
