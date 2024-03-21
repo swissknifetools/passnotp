@@ -10,8 +10,7 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-otpclip-run = 'otpclip.main:main'
-otpclip-test = 'pytest'
+otpclip = 'otpclip.main:main'
 
 
 [tool.poetry.dependencies]
