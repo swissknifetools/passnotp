@@ -6,8 +6,8 @@ authors = ["Joni Seraj <serajjoni@gmail.com>", "Ergi Kame<ergikame@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-  { include = "./packages/passclip" },
-  { include = "./packages/otpclip" }
+  { include = "./apps/passclip" },
+  { include = "./apps/otpclip" }
 ]
 
 
@@ -20,8 +20,8 @@ click = "^8.1.7"
 toml = "^0.10.2"
 pyotp = "^2.9.0"
 shared = { path = "./libs/shared", develop = true }
-passclip = { path = "./packages/passclip", develop = true }
-otpclip = { path = "./packages/otpclip", develop = true }
+passclip = { path = "./apps/passclip", develop = true }
+otpclip = { path = "./apps/otpclip", develop = true }
 sqlalchemy = "^2.0.28"
 
 
