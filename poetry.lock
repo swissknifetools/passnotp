@@ -325,7 +325,7 @@ toml = "^0.10.2"
 
 [package.source]
 type = "directory"
-url = "packages/otpclip"
+url = "apps/otpclip"
 
 [[package]]
 name = "packaging"
@@ -358,7 +358,7 @@ toml = "^0.10.2"
 
 [package.source]
 type = "directory"
-url = "packages/passclip"
+url = "apps/passclip"
 
 [[package]]
 name = "pathspec"
@@ -794,4 +794,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "8f8d341d9ccf8a49e6b8e0c8769808b6f5d66ce9e2f1f2e381887c9a86ba62bb"
+content-hash = "dc586cbcd4e364dfab98afb7b1d6810c60abb3ec577e8cf368c97eb10716dab2"

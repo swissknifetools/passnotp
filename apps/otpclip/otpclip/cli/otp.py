@@ -1,13 +1,12 @@
-from email.policy import default
 from pathlib import Path
 
 import click
 from click_default_group import DefaultGroup
+from otpclip.app.core.logging.logging import logger
 from otpclip.app.otp.command.create import create_otp
 from otpclip.app.otp.command.delete import delete_otp
 from otpclip.app.otp.query.get import get_otp
 from otpclip.app.otp.query.list import list_otp
-from otpclip.app.core.logging.logging import logger
 from shared.toml import get_version_from_toml
 
 

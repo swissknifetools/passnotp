@@ -7,6 +7,9 @@ license = "MIT"
 readme = "README.md"
 packages = [
   {include="logging"},
+  {include="profile"},
+  {include="config"},
+  {include="toml"}
 ]
 
 [tool.poetry.dependencies]
