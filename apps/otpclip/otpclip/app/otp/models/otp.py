@@ -5,8 +5,8 @@ from sqlalchemy.orm import Mapped, mapped_column
 
 
 class OTP(Base):
-    __tablename__ = 'otp'
-    
+    __tablename__ = "otp"
+
     id: Mapped[str] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(30), nullable=False)
     myname: Mapped[str] = mapped_column(String(30), nullable=False)

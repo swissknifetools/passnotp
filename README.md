@@ -17,10 +17,20 @@
 - [Licence](#licence)
 - [Contact](#contact)
 
+## Installation
+
+## Usage
+
+## Contributing
+
 ## Licence
 [**passnotp CLI**][repo_url] are free and open-source software licensed under the [MIT license][repo_licence_url], created and supported by Joni Seraj and Ergi Kame.
 
 ## Contact
+
+<div style="display: flex; gap: 10px; flex-direction: row; justify-content: center; align-items: center;">
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
 #### Joni Seraj 
 [![GitHub](https://img.shields.io/badge/GitHub-Profile?style=for-the-badge&logo=github&logoColor=white&label=Joni1695
 )](https://github.com/Joni1695)
@@ -29,6 +39,10 @@
 [![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&label=serajjoni%40gmail.com&link=serajjoni%40gmail.com
 )](mailto:serajjoni@gmail.com)
 
+</div>
+
+<div style="display: flex; flex-direction: column;justify-content: center; align-items: center;">
+
 #### Ergi Kame
 [![GitHub](https://img.shields.io/badge/GitHub-Profile?style=for-the-badge&logo=github&logoColor=white&label=ErgiKame
 )](https://github.com/ErgiKame)
@@ -36,6 +50,10 @@
 )](https://www.linkedin.com/in/ergi-kame-016656197/)
 [![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&label=ergikame@gmail.com&link=serajjoni%40gmail.com
 )](mailto:ergikame@gmail.com)
+
+</div>
+</div>
+
 
 <!-- Repository -->
 

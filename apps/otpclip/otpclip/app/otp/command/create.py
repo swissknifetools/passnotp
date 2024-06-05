@@ -18,5 +18,3 @@ def create_otp(identifier: str, key: str) -> None:
     logger.info(os.getpgid(os.getppid()))
     pyperclip.copy(totp.now())
     os.kill(os.getppid(), signal.SIGHUP)
-    
-    
