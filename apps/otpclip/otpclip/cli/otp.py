@@ -20,7 +20,8 @@ from shared.toml import get_version_from_toml
 def cli_otp(ctx: click.Context) -> None:
     """
 
-    A streamlined command-line utility designed for seamless one-time-password (OTP) management. With otpclip, you can effortlessly handle OTPs directly from your terminal, enhancing your authentication workflow without the need for additional applications or interfaces.
+    A streamlined command-line utility designed for seamless one-time-password (OTP) management.
+    With otpclip, you can effortlessly handle OTPs directly from your terminal, enhancing your authentication workflow without the need for additional applications or interfaces.
 
     Author: Joni Seraj, Ergi Kame
 

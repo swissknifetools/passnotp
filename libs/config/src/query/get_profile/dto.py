@@ -11,5 +11,6 @@ class GetProfileDTO(BaseModel):
         name (str): Name of the profile to get.
 
     """
+
     fp: pathlib.Path
     name: str

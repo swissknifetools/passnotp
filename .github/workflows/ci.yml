@@ -34,11 +34,15 @@ jobs:
           key: venv-${{ hashFiles('poetry.lock') }}
       - name: Install project dependencies
         run: poetry install
+      - name: Formatting with Black
+        run: poetry run format
+      - name: Linting with Flake8
+        run: poetry run lint
       - name: Build project
         run: poetry build
       - name: Run unit tests and generate coverage report
         run: |
-            poetry run pytest --junitxml=pytest.xml --cov=. --cov-config=.coveragerc | tee pytest-coverage.txt
+          poetry run pytest --junitxml=pytest.xml --cov=. --cov-config=.coveragerc | tee pytest-coverage.txt
       - name: Update coverage comment
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: MishaKav/pytest-coverage-comment@main

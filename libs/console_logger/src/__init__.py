@@ -12,7 +12,6 @@ class ColoredFormatter(logging.Formatter):
     """
 
     def __init__(self, fmt: str, use_color: bool = True):
-
         super().__init__(fmt)
         self.use_color = use_color
 
