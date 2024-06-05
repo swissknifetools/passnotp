@@ -42,6 +42,7 @@ jobs:
         run: |
           poetry run pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt
       - name: Pytest coverage comment
+        if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: MishaKav/pytest-coverage-comment@main
         with:
           pytest-coverage-path: ./pytest-coverage.txt
