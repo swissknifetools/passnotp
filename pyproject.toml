@@ -7,8 +7,6 @@ license = "MIT"
 readme = "README.md"
 
 packages = [
-  { include = "./apps/passclip" },
-  { include = "./apps/otpclip" },
   { include = "./libs/console_logger" },
   { include = "./libs/config" },
 ]
@@ -23,14 +21,7 @@ python = "^3.12"
 pip = "^23.3.1"
 pydantic = "^2.4.2"
 pydantic-settings = "^2.0.3"
-click = "^8.1.7"
 toml = "^0.10.2"
-pyotp = "^2.9.0"
-console_logger = { path = "./libs/console_logger", develop = true } 
-config = { path = "./libs/config", develop = true } 
-passclip = { path = "./apps/passclip", develop = true }
-otpclip = { path = "./apps/otpclip", develop = true }
-sqlalchemy = "^2.0.28"
 
 
 [tool.poetry.group.dev.dependencies]
