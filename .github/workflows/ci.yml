@@ -9,8 +9,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  build:
-    name: Build ${{ matrix.os }} with Python ${{ matrix.python-version }}
+  integration:
+    name: OS:${{ matrix.os }} Python:${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -19,29 +19,27 @@ jobs:
         poetry-version: ["1.8.2"]
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Install python:${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
-      - name: Run image
+      - name: Install poetry:${{ matrix.poetry-version }}
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - uses: actions/cache@v3
-        name: Define a cache for the virtual environment based on the dependencies lock file
+        name: Cache poetry virtual environment
         with:
           path: ./.venv
           key: venv-${{ hashFiles('poetry.lock') }}
-      - name: Install the project dependencies
+      - name: Install project dependencies
         run: poetry install
-      - name: Run tests
-        run: poetry run pytest --cov=.
-      - name: Build coverage file
+      - name: Build project
+        run: poetry build
+      - name: Run unit tests and generate coverage report
         run: |
           poetry run pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt
-      - name: Pytest coverage comment
+      - name: Update coverage comment
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: MishaKav/pytest-coverage-comment@main
         with:
