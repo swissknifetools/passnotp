@@ -38,7 +38,7 @@ jobs:
         run: poetry build
       - name: Run unit tests and generate coverage report
         run: |
-          poetry run pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt
+            poetry run pytest --junitxml=pytest.xml --cov=. --cov-config=.coveragerc | tee pytest-coverage.txt
       - name: Update coverage comment
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: MishaKav/pytest-coverage-comment@main
