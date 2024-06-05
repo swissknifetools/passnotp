@@ -1,0 +1,14 @@
+# .pre-commit-config.yaml
+repos:
+  - repo: local
+    hooks:
+      - id: poetry-format
+        name: Format code with Black
+        entry: poetry run format
+        language: system
+        types: [python]
+      - id: poetry-lint
+        name: Lint code with flake8
+        entry: poetry run lint
+        language: system
+        types: [python]

@@ -1,6 +1,7 @@
 import os
 
 from otpclip.app.core.config.env import environment
+from otpclip.app.otp.models.otp import OTP
 from shared.logging import LogLevel
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase
@@ -18,7 +19,5 @@ engine.connect()
 class Base(DeclarativeBase):
     pass
 
-
-from otpclip.app.otp.models.otp import OTP
 
 Base.metadata.create_all(engine)
