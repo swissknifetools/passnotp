@@ -32,6 +32,9 @@ pytest-cov = "^4.1.0"
 pylint = "^3.0.1"
 pre-commit = "^3.7.1"
 flake8 = "^7.0.0"
+mkdocs = "^1.6.0"
+mkdocs-material = "^9.5.25"
+mkdocstrings = "^0.25.1"
 
 [build-system]
 requires = ["setuptools", "poetry-core"]
