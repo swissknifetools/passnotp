@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "console-logger"
+version = "0.1.0"
+description = "Console logger handler for passnotp."
+authors = ["Joni Seraj <serajjoni@gmail.com>", "Ergi Kame<ergikame@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+    { include = "src", develop = true }
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

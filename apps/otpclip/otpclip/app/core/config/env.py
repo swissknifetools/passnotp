@@ -7,9 +7,12 @@ from shared.logging import LogLevel
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_prefix='OTPCLIP_', env_file=f".env.{os.environ.get('OTPCLIP_ENV', 'local')}")
-    
+    model_config = SettingsConfigDict(
+        env_prefix="OTPCLIP_", env_file=f".env.{os.environ.get('OTPCLIP_ENV', 'local')}"
+    )
+
     LOGGING_LEVEL: LogLevel = LogLevel.DEBUG
     SQL_ALCHEMY_URL: str
-    
+
+
 environment = Settings()

@@ -5,10 +5,17 @@ description = "Monorepo for passclip and otpclip"
 authors = ["Joni Seraj <serajjoni@gmail.com>", "Ergi Kame<ergikame@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+
 packages = [
   { include = "./apps/passclip" },
-  { include = "./apps/otpclip" }
+  { include = "./apps/otpclip" },
+  { include = "./libs/console_logger" },
+  { include = "./libs/config" },
 ]
+
+[tool.poetry.scripts]
+format = "scripts.format:main"
+lint = "scripts.lint:main"
 
 
 [tool.poetry.dependencies]
@@ -19,14 +26,14 @@ pydantic-settings = "^2.0.3"
 click = "^8.1.7"
 toml = "^0.10.2"
 pyotp = "^2.9.0"
-shared = { path = "./libs/shared", develop = true }
+console_logger = { path = "./libs/console_logger", develop = true } 
+config = { path = "./libs/config", develop = true } 
 passclip = { path = "./apps/passclip", develop = true }
 otpclip = { path = "./apps/otpclip", develop = true }
 sqlalchemy = "^2.0.28"
 
 
 [tool.poetry.group.dev.dependencies]
-flake8 = "^6.1.0"
 black = "^23.10.0"
 isort = "^5.12.0"
 pytest = "^7.4.2"
