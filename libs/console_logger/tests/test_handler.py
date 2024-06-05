@@ -1,7 +1,5 @@
 import logging
 
-from requests import get
-
 from libs.console_logger.src import (
     ColoredFormatter,
     ConsoleHandler,
