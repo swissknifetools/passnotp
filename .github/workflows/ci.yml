@@ -3,6 +3,11 @@ name: CI
 on:
   pull_request:
 
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+
 jobs:
   build:
     name: Build ${{ matrix.os }} with Python ${{ matrix.python-version }}
@@ -35,7 +40,7 @@ jobs:
         run: poetry run pytest --cov=.
       - name: Build coverage file
         run: |
-          poetry run pytest --junitxml=pytest.xml --cov-report=term-missing:skip-covered --cov=. | tee pytest-coverage.txt
+          poetry run pytest --junitxml=pytest.xml --cov=. | tee pytest-coverage.txt
       - name: Pytest coverage comment
         uses: MishaKav/pytest-coverage-comment@main
         with:
