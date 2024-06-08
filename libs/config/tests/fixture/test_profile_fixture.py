@@ -5,49 +5,49 @@ from libs.config.src.model.profile_model import ProfileConfigModel
 
 @pytest.fixture(scope="session")
 def profile_debug_false() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="DEBUG", exit=False)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=False)
 
 
 @pytest.fixture(scope="session")
 def profile_debug_true() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="DEBUG", exit=True)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=True)
 
 
 @pytest.fixture(scope="session")
 def profile_info_false() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="INFO", exit=False)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=False)
 
 
 @pytest.fixture(scope="session")
 def profile_info_true() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="INFO", exit=True)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=True)
 
 
 @pytest.fixture(scope="session")
 def profile_warning_false() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="WARNING", exit=False)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=False)
 
 
 @pytest.fixture(scope="session")
 def profile_warning_true() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="WARNING", exit=True)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=True)
 
 
 @pytest.fixture(scope="session")
 def profile_error_false() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="ERROR", exit=False)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=False)
 
 
 @pytest.fixture(scope="session")
 def profile_error_true() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="ERROR", exit=True)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=True)
 
 
 @pytest.fixture(scope="session")
 def profile_critical_false() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="CRITICAL", exit=False)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=False)
 
 
 @pytest.fixture(scope="session")
 def profile_critical_true() -> ProfileConfigModel:
-    return ProfileConfigModel(sqlite_url="localhost:1433", log_level="CRITICAL", exit=True)
+    return ProfileConfigModel(sqlite_url="localhost:1433", exit=True)

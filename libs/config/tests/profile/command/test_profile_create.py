@@ -35,12 +35,10 @@ def test_create_profile(config_path_factory: pathlib.Path):
         profiles={
             "default": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
             "test": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
         }
@@ -49,7 +47,6 @@ def test_create_profile(config_path_factory: pathlib.Path):
     profile_dto = CreateProfileDTO(
         name="project1",
         sqlite_url="localhost:1433",
-        log_level="DEBUG",
         exit=False,
         fp=config_path_factory / "config.write_config",
     )
@@ -58,17 +55,14 @@ def test_create_profile(config_path_factory: pathlib.Path):
         profiles={
             "default": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
             "test": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
             "project1": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
         }
@@ -87,17 +81,14 @@ def test_create_profile_already_exists(config_path_factory: pathlib.Path):
         profiles={
             "default": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
             "test": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
             "project1": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
         }
@@ -109,7 +100,6 @@ def test_create_profile_already_exists(config_path_factory: pathlib.Path):
     profile_dto = CreateProfileDTO(
         name="project1",
         sqlite_url="localhost:1433",
-        log_level="DEBUG",
         exit=False,
         fp=config_path_factory / "config.write_config",
     )
@@ -123,17 +113,14 @@ def test_create_profile_no_valid_config(config_path_factory: pathlib.Path):
         profiles={
             "default": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
             "test": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
             "project1": {
                 "sqlite_url": "localhost:1433",
-                "log_level": "DEBUG",
                 "exit": False,
             },
         }
@@ -145,7 +132,6 @@ def test_create_profile_no_valid_config(config_path_factory: pathlib.Path):
     profile_dto = CreateProfileDTO(
         name="project1",
         sqlite_url="localhost:1433",
-        log_level="DEBUG",
         exit=False,
         fp=config_path_factory / "config.no_config",
     )

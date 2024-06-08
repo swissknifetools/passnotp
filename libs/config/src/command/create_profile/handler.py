@@ -23,7 +23,6 @@ def create_profile(args: CreateProfileDTO) -> ProfileConfigModel:
 
     config.profiles[args.name] = ProfileConfigModel(
         sqlite_url=args.sqlite_url,
-        log_level=args.log_level,
         exit=args.exit,
     )
 

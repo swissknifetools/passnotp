@@ -19,5 +19,4 @@ class UpdateProfileDTO(BaseModel):
     fp: pathlib.Path
     name: str
     sqlite_url: str
-    log_level: LogLevel = LogLevel.INFO
     exit: bool = False

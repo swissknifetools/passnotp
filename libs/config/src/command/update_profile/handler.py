@@ -24,7 +24,6 @@ def update_profile(args: UpdateProfileDTO) -> ProfileConfigModel:
 
     profile = ProfileConfigModel(
         sqlite_url=args.sqlite_url,
-        log_level=args.log_level,
         exit=args.exit,
     )
 
