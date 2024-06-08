@@ -49,6 +49,11 @@ theme:
     - content.action.edit
     - content.action.view
     - content.code.annotate
+
+
+nav:
+  - Home: index.md
+  - Console Logger: libs/console_logger.md
   
 
 extra_css:

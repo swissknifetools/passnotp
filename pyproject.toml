@@ -9,11 +9,13 @@ readme = "README.md"
 packages = [
   { include = "./libs/console_logger" },
   { include = "./libs/config" },
+  { include = "./apps/passclip" },
 ]
 
 [tool.poetry.scripts]
 format = "scripts.format:main"
 lint = "scripts.lint:main"
+passclip = "apps.passclip.src.__main__:main"
 
 
 [tool.poetry.dependencies]
@@ -22,6 +24,9 @@ pip = "^23.3.1"
 pydantic = "^2.4.2"
 pydantic-settings = "^2.0.3"
 toml = "^0.10.2"
+mkdocstrings-python = "^1.10.3"
+ansicolors = "^1.1.8"
+rich-argparse = "^1.5.1"
 
 
 [tool.poetry.group.dev.dependencies]

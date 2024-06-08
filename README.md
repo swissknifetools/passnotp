@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="repo_url" target="_blank" title="Go to the passnotp website."><img width="196px" alt="passntop logo" src="./assets/logo.svg"></a>
+<a href="repo_url" target="_blank" title="Go to the passnotp website."><img width="196px" alt="passntop logo" src="./docs/assets/logo.svg"></a>
 
 <a name="readme-top"></a>
 
@@ -58,5 +58,5 @@
 <!-- Repository -->
 
 [repo_url]: https://github.com/swissknifetools/passnotp
-[repo_logo_img]: ./assets/logo.svg
+[repo_logo_img]: ./docs/assets/logo.svg
 [repo_licence_url]: ./LICENCE
