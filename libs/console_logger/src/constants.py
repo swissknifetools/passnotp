@@ -20,5 +20,5 @@ class LogLevelColor(str, Enum):
     ERROR = "\033[1;31m"
     CRITICAL = "\033[1;41m"
 
-    RESET = "\033[0m"
+    NO_COLOR = "\033[0m"
     WHITE = "\033[1;37m"
