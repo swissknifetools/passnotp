@@ -108,6 +108,58 @@ def test_create_profile_already_exists(config_path_factory: pathlib.Path):
         create_profile(profile_dto)
 
 
+def test_create_profile_already_exists_overwrite(config_path_factory: pathlib.Path):
+    config = ConfigModel(
+        profiles={
+            "default": {
+                "sqlite_url": "localhost:1433",
+                "exit": False,
+            },
+            "test": {
+                "sqlite_url": "localhost:1433",
+                "exit": False,
+            },
+            "project1": {
+                "sqlite_url": "localhost:1433",
+                "exit": False,
+            },
+        }
+    )
+
+    p = config_path_factory / "config.write_config"
+    write_config(p, config)
+
+    profile_dto = CreateProfileDTO(
+        name="project1",
+        sqlite_url="localhost:1434",
+        exit=False,
+        fp=config_path_factory / "config.write_config",
+        overwrite=True,
+    )
+
+    expected_config = ConfigModel(
+        profiles={
+            "default": {
+                "sqlite_url": "localhost:1433",
+                "exit": False,
+            },
+            "test": {
+                "sqlite_url": "localhost:1433",
+                "exit": False,
+            },
+            "project1": {
+                "sqlite_url": "localhost:1434",
+                "exit": False,
+            },
+        }
+    )
+
+    create_profile(profile_dto)
+
+    read_back_config = read_config(p)
+    assert read_back_config == expected_config
+
+
 def test_create_profile_no_valid_config(config_path_factory: pathlib.Path):
     config = ConfigModel(
         profiles={

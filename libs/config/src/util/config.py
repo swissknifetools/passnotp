@@ -20,7 +20,7 @@ def read_config(fp: pathlib.Path) -> ConfigModel:
         ConfigModel: Config model with the profiles.
     """
     if not fp.exists():
-        raise ConfigNotFound(f"File {fp} not found!")
+        raise ConfigNotFound(fp)
 
     raw_config = toml.load(fp)
     profiles = {k: ProfileConfigModel(**v) for k, v in raw_config.items()}

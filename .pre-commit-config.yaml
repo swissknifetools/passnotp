@@ -5,10 +5,10 @@ repos:
       - id: poetry-format
         name: Format code with Black
         entry: poetry run format
-        language: system
+        language: python_venv
         types: [python]
       - id: poetry-lint
         name: Lint code with flake8
         entry: poetry run lint
-        language: system
+        language: python_venv
         types: [python]

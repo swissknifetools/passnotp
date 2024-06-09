@@ -20,3 +20,4 @@ class CreateProfileDTO(BaseModel):
     name: str
     sqlite_url: str
     exit: bool = False
+    overwrite: bool = False

@@ -23,7 +23,7 @@ class Settings(BaseSettings):
 
 
 try:
-    environment = Settings()
+    settings = Settings()
 except ValidationError as e:
     logger.error(e)
     exit(1)

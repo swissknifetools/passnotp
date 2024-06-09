@@ -18,7 +18,7 @@ def create_profile(args: CreateProfileDTO) -> ProfileConfigModel:
     """
     config = read_config(args.fp)
 
-    if args.name in config.profiles:
+    if args.name in config.profiles and not args.overwrite:
         raise ProfileAlreadyExists(args.name)
 
     config.profiles[args.name] = ProfileConfigModel(

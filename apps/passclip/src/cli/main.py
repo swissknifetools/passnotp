@@ -27,6 +27,7 @@ def get_main_parser(
         formatter_class=argparse.HelpFormatter if no_color else RichHelpFormatter,
     )
     parser.add_argument("-v", "--version", action="version", version="%(prog)s 0.1.0")
+    parser.set_defaults(func=parser.print_help)
 
     command_sp = parser.add_subparsers(title="commands", dest="command")
 
