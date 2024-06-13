@@ -1,15 +1,16 @@
 import logging
 import pathlib
-from logging import Logger
 from os import path
 
 from pydantic import ValidationError, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import SettingsConfigDict
+
+from libs.config.src.cli.config.dto import ConfigSettings
 
 logger = logging.getLogger("passclip")
 
 
-class Settings(BaseSettings):
+class Settings(ConfigSettings):
     model_config = SettingsConfigDict(env_prefix="PASSCLIP_")
 
     CONFIG_PATH: pathlib.Path = pathlib.Path(path.expanduser("~/.passclip/config"))

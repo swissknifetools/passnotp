@@ -7,6 +7,10 @@ from libs.config.src.model.config_model import ConfigModel
 from libs.config.src.model.profile_model import ProfileConfigModel
 
 
+def exists_config(fp: pathlib.Path) -> bool:
+    return fp.exists()
+
+
 def read_config(fp: pathlib.Path) -> ConfigModel:
     """Utility function to read a config file given it's path.
 

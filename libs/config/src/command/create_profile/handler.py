@@ -1,5 +1,7 @@
 from libs.config.src.command.create_profile.dto import CreateProfileDTO
+from libs.config.src.exceptions.config import ConfigNotFound
 from libs.config.src.exceptions.profile import ProfileAlreadyExists
+from libs.config.src.model.config_model import ConfigModel
 from libs.config.src.model.profile_model import ProfileConfigModel
 from libs.config.src.util.config import read_config, write_config
 
@@ -16,7 +18,10 @@ def create_profile(args: CreateProfileDTO) -> ProfileConfigModel:
     Returns:
         ProfileConfigModel: Created profile..
     """
-    config = read_config(args.fp)
+    try:
+        config = read_config(args.fp)
+    except ConfigNotFound:
+        config = ConfigModel(profiles={})
 
     if args.name in config.profiles and not args.overwrite:
         raise ProfileAlreadyExists(args.name)
