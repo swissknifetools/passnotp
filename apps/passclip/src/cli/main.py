@@ -3,9 +3,8 @@ import argparse
 from colors import color
 from rich_argparse import RichHelpFormatter
 
-from apps.passclip.src.cli.config.cli import add_config_cli
 from apps.passclip.src.cli.passclip.cli import add_passclip_cli
-from apps.passclip.src.cli.passclip.controller import get_pass
+from libs.config.src.cli.config.cli import add_config_cli
 from libs.console_logger.src.constants import LogLevel
 
 
@@ -32,6 +31,6 @@ def get_main_parser(
     command_sp = parser.add_subparsers(title="commands", dest="command")
 
     add_passclip_cli(command_sp, common_parser, no_color)
-    add_config_cli(command_sp, common_parser, no_color)
+    add_config_cli(command_sp, [common_parser], no_color)
 
     return parser

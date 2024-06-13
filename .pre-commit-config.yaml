@@ -12,3 +12,9 @@ repos:
         entry: poetry run lint
         language: python_venv
         types: [python]
+      - id: poetry-test
+        name: Run tests with pytest
+        entry: poetry run pytest .
+        language: python_venv
+        pass_filenames: false
+        types: [python]

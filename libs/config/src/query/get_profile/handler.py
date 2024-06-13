@@ -21,6 +21,6 @@ def get_profile(args: GetProfileDTO) -> ProfileConfigModel:
     config = read_config(args.fp)
 
     if args.name not in config.profiles:
-        raise ProfileNotFound(args.name)
+        raise ProfileNotFound(f"Profile {args.name} not found in config file {args.fp}!")
 
     return config.profiles[args.name]
