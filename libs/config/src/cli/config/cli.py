@@ -3,6 +3,7 @@ from typing import List
 
 from rich_argparse import RichHelpFormatter
 
+from libs.config.src.cli.common import get_profile_arguments
 from libs.config.src.cli.config.controller import config_init, config_show
 
 
@@ -11,23 +12,23 @@ def add_config_cli(
     parents: List[argparse.ArgumentParser],
     no_color: bool = False,
 ) -> None:
-    profile_cli = get_profile_cli()
+    profile_arguments = get_profile_arguments()
 
     config_parser: argparse.ArgumentParser = command_sp.add_parser(
         "config",
-        help="Configuration commands",
+        help="Configuration utility commands.",
         parents=parents,
         formatter_class=argparse.HelpFormatter if no_color else RichHelpFormatter,
     )
     config_parser.set_defaults(func=config_parser.print_help)
     config_subparsers = config_parser.add_subparsers(title="config", dest="subcommand")
 
-    # COMMANDS
+    # CONFIG COMMANDS
     init_config_parser = config_subparsers.add_parser(
         "init",
         help="Initialize a new config file.",
         description="Initialize passclip's config file.",
-        parents=[profile_cli, *parents],
+        parents=[profile_arguments, *parents],
         formatter_class=argparse.HelpFormatter if no_color else RichHelpFormatter,
     )
     init_config_parser.add_argument("--sqlite_url", type=str, help="SQLite connection URL.")
@@ -46,11 +47,3 @@ def add_config_cli(
         formatter_class=argparse.HelpFormatter if no_color else RichHelpFormatter,
     )
     show_config_parser.set_defaults(func=config_show)
-
-
-def get_profile_cli():
-    profile_parser = argparse.ArgumentParser(add_help=False)
-    profile_parser.add_argument(
-        "-p", "--profile", type=str, help="Profile of the entry.", default="default"
-    )
-    return profile_parser

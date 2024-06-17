@@ -3,7 +3,7 @@ import pathlib
 import pytest
 
 from libs.config.src.command.delete_profile.dto import DeleteProfileDTO
-from libs.config.src.command.delete_profile.handler import delete_profile
+from libs.config.src.command.delete_profile.handler import run as delete_profile_cmd
 from libs.config.src.exceptions.config import ConfigNotFound
 from libs.config.src.exceptions.profile import ProfileNotFound
 from libs.config.src.model.config_model import ConfigModel
@@ -58,7 +58,7 @@ def test_delete_profile(config_path_factory: pathlib.Path):
         fp=p,
         name="project1",
     )
-    returned_profile = delete_profile(delete_profile_dto)
+    returned_profile = delete_profile_cmd(delete_profile_dto)
 
     read_back_config = read_config(p)
     assert read_back_config == ConfigModel(
@@ -108,7 +108,7 @@ def test_delete_profile_no_valid_config(config_path_factory: pathlib.Path):
     )
 
     with pytest.raises(ConfigNotFound):
-        delete_profile(delete_profile_dto)
+        delete_profile_cmd(delete_profile_dto)
 
 
 def test_delete_profile_no_profile(config_path_factory: pathlib.Path):
@@ -141,4 +141,4 @@ def test_delete_profile_no_profile(config_path_factory: pathlib.Path):
     )
 
     with pytest.raises(ProfileNotFound):
-        delete_profile(delete_profile_dto)
+        delete_profile_cmd(delete_profile_dto)

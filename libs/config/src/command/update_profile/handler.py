@@ -4,7 +4,7 @@ from libs.config.src.model.profile_model import ProfileConfigModel
 from libs.config.src.util.config import read_config, write_config
 
 
-def update_profile(args: UpdateProfileDTO) -> ProfileConfigModel:
+def run(args: UpdateProfileDTO) -> ProfileConfigModel:
     """Command to update a profile in the config file.
 
     Args:
@@ -22,10 +22,9 @@ def update_profile(args: UpdateProfileDTO) -> ProfileConfigModel:
     if args.name not in config.profiles:
         raise ProfileNotFound(args.name)
 
-    profile = ProfileConfigModel(
-        sqlite_url=args.sqlite_url,
-        exit=args.exit,
-    )
+    profile = config.profiles[args.name]
+    profile.sqlite_url = args.sqlite_url if args.sqlite_url else profile.sqlite_url
+    profile.exit = args.exit if args.exit else profile.exit
 
     config.profiles[args.name] = profile
     write_config(args.fp, config)

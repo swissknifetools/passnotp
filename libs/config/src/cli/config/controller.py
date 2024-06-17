@@ -5,11 +5,9 @@ from colors import color
 
 from libs.config.src.cli.config.dto import InitConfigCliArgs, ShowConfigCliArgs
 from libs.config.src.command.create_profile.dto import CreateProfileDTO
-from libs.config.src.command.create_profile.handler import create_profile
+from libs.config.src.command.create_profile.handler import run as create_profile_cmd
 from libs.config.src.exceptions.config import ConfigNotFound
 from libs.config.src.model.config_model import ConfigModel
-from libs.config.src.query.get_profile.dto import GetProfileDTO
-from libs.config.src.query.get_profile.handler import get_profile
 from libs.config.src.util.config import exists_config, read_config
 
 logger = logging.getLogger("passclip")
@@ -55,7 +53,7 @@ def config_init(args: InitConfigCliArgs) -> ConfigModel:
     else:
         exit_behaviour = args.exit
 
-    create_profile(
+    create_profile_cmd(
         CreateProfileDTO(
             fp=args.settings.CONFIG_PATH,
             name=profile_name,

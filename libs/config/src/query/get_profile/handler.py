@@ -6,7 +6,7 @@ from libs.config.src.query.get_profile.dto import GetProfileDTO
 from libs.config.src.util.config import read_config
 
 
-def get_profile(args: GetProfileDTO) -> ProfileConfigModel:
+def run(args: GetProfileDTO) -> ProfileConfigModel:
     """Get a profile from the config file.
 
     Args:

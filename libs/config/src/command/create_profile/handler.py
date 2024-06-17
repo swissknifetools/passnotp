@@ -6,7 +6,7 @@ from libs.config.src.model.profile_model import ProfileConfigModel
 from libs.config.src.util.config import read_config, write_config
 
 
-def create_profile(args: CreateProfileDTO) -> ProfileConfigModel:
+def run(args: CreateProfileDTO) -> ProfileConfigModel:
     """Creates a new profile in the config file.
 
     Args:

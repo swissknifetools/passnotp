@@ -1,8 +1,7 @@
 import pathlib
+from typing import Optional
 
 from pydantic import BaseModel
-
-from libs.console_logger.src.constants import LogLevel
 
 
 class UpdateProfileDTO(BaseModel):
@@ -18,5 +17,5 @@ class UpdateProfileDTO(BaseModel):
 
     fp: pathlib.Path
     name: str
-    sqlite_url: str
-    exit: bool = False
+    sqlite_url: Optional[str]
+    exit: Optional[bool] = False

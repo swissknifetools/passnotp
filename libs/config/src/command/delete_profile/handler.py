@@ -4,7 +4,7 @@ from libs.config.src.model.profile_model import ProfileConfigModel
 from libs.config.src.util.config import read_config, write_config
 
 
-def delete_profile(args: DeleteProfileDTO) -> ProfileConfigModel:
+def run(args: DeleteProfileDTO) -> ProfileConfigModel:
     """Delete a profile from the config file.
 
     Args:

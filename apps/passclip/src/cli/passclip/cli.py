@@ -9,6 +9,7 @@ from apps.passclip.src.cli.passclip.controller import (
     list_pass,
     update_pass,
 )
+from libs.config.src.cli.common import get_profile_arguments
 
 
 def add_passclip_cli(
@@ -16,10 +17,7 @@ def add_passclip_cli(
     common_parser: argparse.ArgumentParser,
     no_color: bool = False,
 ) -> None:
-    profile_parser = argparse.ArgumentParser(add_help=False)
-    profile_parser.add_argument(
-        "-p", "--profile", type=str, help="Profile of the entry.", default="default"
-    )
+    profile_parser = get_profile_arguments()
 
     # COMMANDS
     create_parser = command_sp.add_parser(

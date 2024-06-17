@@ -5,7 +5,7 @@ from rich_argparse import RichHelpFormatter
 
 from apps.passclip.src.cli.passclip.cli import add_passclip_cli
 from libs.config.src.cli.config.cli import add_config_cli
-from libs.console_logger.src.constants import LogLevel
+from libs.config.src.cli.profile.cli import add_profile_cli
 
 
 def get_main_parser(
@@ -32,5 +32,6 @@ def get_main_parser(
 
     add_passclip_cli(command_sp, common_parser, no_color)
     add_config_cli(command_sp, [common_parser], no_color)
+    add_profile_cli(command_sp, [common_parser], no_color)
 
     return parser

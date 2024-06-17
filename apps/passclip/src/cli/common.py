@@ -1,5 +1,6 @@
 import argparse
 
+from libs.config.src.cli.config.dto import ConfigSettings
 from libs.console_logger.src.constants import LogLevel
 
 

@@ -34,7 +34,7 @@ def test_get_console_handler_args():
 def test_colored_formatter_no_color(log_record_info):
     formatter = ColoredFormatter(fmt="%(asctime)s - %(message)s", use_color=False)
     log_entry = formatter.format(log_record_info)
-    assert log_entry == f"INFO {log_record_info.asctime} - {log_record_info.message}"
+    assert log_entry == f"[INFO] {log_record_info.asctime} - {log_record_info.message}"
 
 
 def test_colored_formatter_with_color_debug(log_record_debug):
