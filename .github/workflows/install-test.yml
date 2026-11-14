@@ -1,0 +1,105 @@
+# Runs the installers the way users do (piped, downloading release archives),
+# against archives built from this commit and served locally.
+name: Install test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - run: scripts/dist.sh 0.0.0-test
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  unix:
+    needs: build
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      PASSNOTP_DOWNLOAD_URL: http://127.0.0.1:8000
+      PASSNOTP_NO_DEPS: "1"
+      PASSNOTP_NO_KEYRING: "1"
+      SHELL: /bin/bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - name: Serve release archives
+        run: |
+          (python3 -m http.server 8000 --directory dist >/dev/null 2>&1 &)
+          sleep 2
+      - name: Install (piped, like curl | sh)
+        run: sh < install.sh
+      - name: Use
+        run: |
+          set -eu
+          bin="$HOME/.local/bin"
+          "$bin/passnotp" --version | grep -q 0.0.0-test
+          [ -L "$bin/otp" ]
+          grep -q 'added by passnotp' ~/.bashrc
+          m="throwaway master"
+          a="$RUNNER_TEMP/a/vault.json" b="$RUNNER_TEMP/b/vault.json"
+          printf '%s\n%s\nhunter2\nhunter2\n' "$m" "$m" | PASSNOTP_VAULT="$a" "$bin/passnotp" pass add demo
+          [ "$(echo "$m" | PASSNOTP_VAULT="$a" "$bin/pass" demo --print)" = hunter2 ]
+          [ -z "$(echo "$m" | PASSNOTP_VAULT="$a" "$bin/otp" ls)" ]
+          echo "$m" | PASSNOTP_VAULT="$a" "$bin/passnotp" export "$RUNNER_TEMP/backup.json"
+          echo "$m" | PASSNOTP_VAULT="$b" "$bin/passnotp" import "$RUNNER_TEMP/backup.json"
+          [ "$(echo "$m" | PASSNOTP_VAULT="$b" "$bin/passnotp" pass demo --print)" = hunter2 ]
+      - name: Uninstall
+        run: |
+          sh install.sh --uninstall
+          [ ! -e "$HOME/.local/bin/passnotp" ]
+          ! grep -q 'added by passnotp' ~/.bashrc
+
+  windows:
+    needs: build
+    runs-on: windows-latest
+    env:
+      PASSNOTP_DOWNLOAD_URL: http://127.0.0.1:8000
+      PASSNOTP_NO_KEYRING: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - name: Serve release archives
+        shell: pwsh
+        run: |
+          Start-Process python -ArgumentList '-m', 'http.server', '8000', '--directory', 'dist' -WindowStyle Hidden
+          Start-Sleep 3
+      - name: Install (piped, like irm | iex)
+        shell: pwsh
+        run: Get-Content -Raw install.ps1 | Invoke-Expression
+      - name: Use
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $PSNativeCommandUseErrorActionPreference = $true
+          $bin = Join-Path $env:LOCALAPPDATA 'passnotp\bin'
+          if ([Environment]::GetEnvironmentVariable('Path', 'User') -notlike "*$bin*") { throw 'not on PATH' }
+          if (-not (Select-String -Path $PROFILE -SimpleMatch 'passnotp completion' -Quiet)) { throw 'no completion' }
+          if (-not ((& "$bin\passnotp.exe" --version) -like '*0.0.0-test*')) { throw 'wrong version' }
+          $m = 'throwaway master'
+          $env:PASSNOTP_VAULT = "$env:RUNNER_TEMP\a\vault.json"
+          "$m`n$m`nhunter2`nhunter2`n" | & "$bin\passnotp.exe" pass add demo
+          if (("$m`n" | & "$bin\pass.exe" demo --print) -ne 'hunter2') { throw 'pass.exe did not print the password' }
+          "$m`n" | & "$bin\passnotp.exe" export "$env:RUNNER_TEMP\backup.json"
+          $env:PASSNOTP_VAULT = "$env:RUNNER_TEMP\b\vault.json"
+          "$m`n" | & "$bin\passnotp.exe" import "$env:RUNNER_TEMP\backup.json"
+          if (("$m`n" | & "$bin\otp.exe" ls) -ne $null) { throw 'otp.exe ls should be empty' }
+          if (("$m`n" | & "$bin\passnotp.exe" pass demo --print) -ne 'hunter2') { throw 'import lost the password' }
