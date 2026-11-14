@@ -1,62 +1,58 @@
-<div align="center">
+# passnotp
 
-<a href="repo_url" target="_blank" title="Go to the passnotp website."><img width="196px" alt="passntop logo" src="./docs/assets/logo.svg"></a>
+Passwords and 2FA codes, one command away. Type `pass github` and the password
+is on your clipboard. Type `otp github` and so is the code.
 
-<a name="readme-top"></a>
+## Install
 
-</div>
+**Linux / macOS**
 
-#
+```sh
+curl -fsSL https://raw.githubusercontent.com/swissknifetools/passnotp/main/install.sh | sh
+```
 
-**passnotp** is an open-source project that provides two powerful CLI tools, **passclip** and **otpclip**, designed to streamline password and one-time password (OTP) management with practicality in mind. Our tools leverage the clipboard to ensure quick and secure access to your credentials. With passclip, you can effortlessly copy passwords to your clipboard, while otpclip allows you to store and quickly access OTPs. passnotp offers a minimalist, efficient solution for all your password management needs, prioritizing ease of use and security.
+**Windows** (PowerShell)
 
-## Table Of Content
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [Licence](#licence)
-- [Contact](#contact)
+```powershell
+irm https://raw.githubusercontent.com/swissknifetools/passnotp/main/install.ps1 | iex
+```
 
-## Installation
+Then open a new terminal. On Linux the installer also sets up the clipboard and
+screenshot tools it needs; macOS and Windows already have them.
 
-## Usage
+## Use
 
-## Contributing
+```sh
+pass add            # save a password
+pass github         # copy it
+otp add             # save a 2FA account: select its QR code on screen
+otp github          # copy the current code
+```
 
-## Licence
-[**passnotp CLI**][repo_url] are free and open-source software licensed under the [MIT license][repo_licence_url], created and supported by Joni Seraj and Ergi Kame.
+`ls`, `update` and `delete` work for both, and everything asks for what you
+leave out. Tab completes names.
 
-## Contact
+## Security
 
-<div style="display: flex; gap: 10px; flex-direction: row; justify-content: center; align-items: center;">
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+Everything lives in one encrypted file (AES-256-GCM), locked with a master
+password you choose the first time. Your OS keyring remembers it, so there are
+no prompts day to day. Forget the master password and the vault cannot be
+opened, so keep it somewhere safe.
 
-#### Joni Seraj 
-[![GitHub](https://img.shields.io/badge/GitHub-Profile?style=for-the-badge&logo=github&logoColor=white&label=Joni1695
-)](https://github.com/Joni1695)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white&link=serajjoni%40gmail.com
-)](https://www.linkedin.com/in/joni-seraj-422620119/)
-[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&label=serajjoni%40gmail.com&link=serajjoni%40gmail.com
-)](mailto:serajjoni@gmail.com)
+Copied secrets are cleared from the clipboard after 45 seconds. Set
+`PASSNOTP_CLEAR_SECONDS` to change that, or to `0` to keep them.
 
-</div>
+## New computer
 
-<div style="display: flex; flex-direction: column;justify-content: center; align-items: center;">
+```sh
+passnotp export           # on the old one: saves passnotp-vault.json
+passnotp import <file>    # on the new one, after installing
+```
 
-#### Ergi Kame
-[![GitHub](https://img.shields.io/badge/GitHub-Profile?style=for-the-badge&logo=github&logoColor=white&label=ErgiKame
-)](https://github.com/ErgiKame)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
-)](https://www.linkedin.com/in/ergi-kame-016656197/)
-[![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&label=ergikame@gmail.com&link=serajjoni%40gmail.com
-)](mailto:ergikame@gmail.com)
+The exported file stays encrypted, so it is safe on a USB stick or in the
+cloud. Importing into an existing vault adds what is missing.
 
-</div>
-</div>
+## More
 
-
-<!-- Repository -->
-
-[repo_url]: https://github.com/swissknifetools/passnotp
-[repo_logo_img]: ./docs/assets/logo.svg
-[repo_licence_url]: ./LICENCE
+- `passnotp passwd`: change the master password
+- Uninstall: `curl -fsSL https://raw.githubusercontent.com/swissknifetools/passnotp/main/install.sh | sh -s -- --uninstall`
