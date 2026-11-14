@@ -358,15 +358,31 @@ func TestCompletion(t *testing.T) {
 			}
 		}
 	}
-	check(AliasArgs("pass", []string{"__complete", ""}), "github", "invault", "tricky", "ls", "add")
-	check(AliasArgs("otp", []string{"__complete", ""}), "other", "rfc6238", "scan")
+	check(AliasArgs("pass", []string{"__complete", ""}), "github", "invault", "tricky")
+	check(AliasArgs("otp", []string{"__complete", ""}), "other", "rfc6238")
+	// Only names: subcommands are not offered.
+	for _, alias := range []string{"pass", "otp"} {
+		r := e.mustRun("", AliasArgs(alias, []string{"__complete", ""})...)
+		for _, sub := range []string{"add", "ls", "delete", "update", "scan"} {
+			if slices.Contains(strings.Split(r.stdout, "\n"), sub) {
+				t.Errorf("%s: subcommand %q offered:\n%s", alias, sub, r.stdout)
+			}
+		}
+	}
 	check([]string{"__complete", "o", "rf"}, "rfc6238")
 	check(AliasArgs("pass", []string{"__complete", "delete", ""}), "invault")
 
+	check([]string{"__complete", ""}, "pass", "otp", "export")
+	if r := e.mustRun("", "pass", "--help"); !strings.Contains(r.stdout, "add") {
+		t.Errorf("subcommands missing from help:\n%s", r.stdout)
+	}
+
 	// With an empty keyring, completion must not prompt (stdin is empty,
-	// so a prompt would fail the run); it only offers subcommands.
+	// so a prompt would fail the run); it offers nothing.
 	clear(e.keys)
-	check(AliasArgs("pass", []string{"__complete", ""}), "ls", "add")
+	if r := e.mustRun("", AliasArgs("pass", []string{"__complete", ""})...); strings.TrimSpace(r.stdout) != ":4" {
+		t.Errorf("locked vault completion = %q", r.stdout)
+	}
 }
 
 func TestInteractiveAdd(t *testing.T) {
