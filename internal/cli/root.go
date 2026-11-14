@@ -65,9 +65,20 @@ func NewRoot(paths Paths) *cobra.Command {
 		SilenceErrors: true,
 	}
 	root.CompletionOptions.DisableDefaultCmd = true
+	passCmd, otpCmd := newPassCmd(a), newOTPCmd(a)
+	// Tab after `pass` or `otp` offers entry names only, not subcommands
+	// like add or ls; they still show in --help and run as usual.
+	root.PersistentPreRun = func(cmd *cobra.Command, _ []string) {
+		if cmd.Name() != cobra.ShellCompRequestCmd && cmd.Name() != cobra.ShellCompNoDescRequestCmd {
+			return
+		}
+		for _, sub := range append(passCmd.Commands(), otpCmd.Commands()...) {
+			sub.Hidden = true
+		}
+	}
 	root.AddCommand(
-		newPassCmd(a),
-		newOTPCmd(a),
+		passCmd,
+		otpCmd,
 		newInitCmd(a),
 		newExportCmd(a),
 		newImportCmd(a),
